@@ -3,13 +3,16 @@ from langchain_groq.chat_models import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from core.data_process import get_metadata, load_dataset
-import google.generativeai as genai
+from google import genai
 from PIL import Image
 from typing import List, Dict
 import json
 import os
 import plotly.graph_objects as go
 import streamlit as st
+from google.genai import types
+import io
+
 load_dotenv()
 
 
@@ -132,14 +135,24 @@ def generate_charts(metadata : dict) -> List[Dict]:
     return charts
 
 
+client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
+
 def analyze_dashboard(image_path: str) -> str:
-    client = genai.Client(
-        api_key=st.secrets["GEMINI_API_KEY"]
-    )
 
     image = Image.open(image_path)
+
+    # Convert image to bytes
+    img_byte_arr = io.BytesIO()
+    image.save(img_byte_arr, format="PNG")
+
+    image_part = types.Part.from_bytes(
+        data=img_byte_arr.getvalue(),
+        mime_type="image/png"
+    )
+
     prompt = """
     You are an expert data analyst.
+
     Analyze this dashboard and provide:
 
     1. Key trends
@@ -152,12 +165,13 @@ def analyze_dashboard(image_path: str) -> str:
 
     Keep the response structured and concise.
     """
+
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=[
             prompt,
-            image
+            image_part
         ]
     )
 
-    return response.text           # type: ignore
+    return response.text        # type: ignore
