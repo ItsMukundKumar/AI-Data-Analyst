@@ -9,7 +9,7 @@ from typing import List, Dict
 import json
 import os
 import plotly.graph_objects as go
-
+import streamlit as st
 load_dotenv()
 
 
@@ -17,7 +17,7 @@ def _load_groq_llm():
     return ChatGroq(
         model="openai/gpt-oss-120b",
         temperature=0,
-        api_key=os.getenv("GROQ_API_KEY"),  # type: ignore
+        api_key=st.secrets["GROQ_API_KEY"],  # type: ignore
         max_tokens=4000,
         max_retries=2,
     )
@@ -134,7 +134,7 @@ def generate_charts(metadata : dict) -> List[Dict]:
 
 def analyze_dashboard(image_path: str) -> str:
     client = genai.Client(
-        api_key=os.getenv("GEMINI_API_KEY")
+        api_key=st.secrets["GEMINI_API_KEY"]
     )
 
     image = Image.open(image_path)
