@@ -135,7 +135,7 @@ def generate_charts(metadata : dict) -> List[Dict]:
     return charts
 
 
-client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
+client = genai.Client(api_key = st.secrets.get("GOOGLE_API_KEY"))
 
 def analyze_dashboard(image_path: str) -> str:
 
