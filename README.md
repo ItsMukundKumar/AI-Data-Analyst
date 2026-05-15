@@ -256,24 +256,6 @@ The application can automatically generate:
 
 ---
 
-# Screenshots
-
-## Dashboard
-
-> Add your dashboard screenshots here.
-
-```markdown
-![Dashboard](screenshots/dashboard.png)
-```
-
-## AI Analysis
-
-```markdown
-![AI Analysis](screenshots/analysis.png)
-```
-
----
-
 # Future Improvements
 
 * PDF report export
