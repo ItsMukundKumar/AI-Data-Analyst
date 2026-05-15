@@ -141,7 +141,7 @@ AI-Data-Analyst/
 ## 1. Clone Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/ItsMukundKumar/AI-Data-Analyst
 
 cd AI-Data-Analyst
 ```
