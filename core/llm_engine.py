@@ -3,7 +3,7 @@ from langchain_groq.chat_models import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from core.data_process import get_metadata, load_dataset
-from google import genai
+import google.generativeai as genai
 from PIL import Image
 from typing import List, Dict
 import json
