@@ -10,5 +10,5 @@ langchain-google-genai
 langchain-groq
 
 google-genai
-
+kaleido
 python-dotenv
