@@ -7,6 +7,7 @@ plotly
 
 langchain
 langchain-google-genai
+langchain-groq
 
 google-genai
 
